@@ -15,6 +15,10 @@ TOKEN = os.getenv("TG_TOKEN")
 bot = TeleBot(TOKEN, threaded=False)
 
 
+def chunk(input_list: list, chunk_size: int) -> list:
+    return [input_list[i:i+chunk_size] for i in range(0, len(input_list), chunk_size)]
+
+
 @bot.message_handler(commands=['start'])
 def start_handler(message):
     bot.set_chat_menu_button(message.chat.id, types.MenuButtonCommands('commands'))
